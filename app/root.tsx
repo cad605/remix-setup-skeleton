@@ -7,13 +7,21 @@ import {
   ScrollRestoration,
 } from 'remix'
 import type { LinksFunction, MetaFunction } from 'remix'
-import styles from './tailwind.css'
+import Layout from './components/layout'
+
+/* stlyes */
+import indexStyles from '../styles/index.css'
+import appStyles from '../styles/app.css'
 
 export const links: LinksFunction = () => {
   return [
     {
       rel: 'stylesheet',
-      href: styles,
+      href: indexStyles,
+    },
+    {
+      rel: 'stylesheet',
+      href: appStyles,
     },
   ]
 }
@@ -24,7 +32,7 @@ export const meta: MetaFunction = () => {
 
 function Document({
   children,
-  title = `Remix By Example`,
+  title = `Remix | By Example`,
 }: {
   children: React.ReactNode
   title?: string
@@ -38,8 +46,8 @@ function Document({
         <title>{title}</title>
         <Links />
       </head>
-      <body>
-        {children}
+      <body className="">
+        <Layout>{children}</Layout>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
